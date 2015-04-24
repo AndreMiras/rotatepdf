@@ -62,9 +62,12 @@ def main():
     parser.add_argument('--src', type=argparse.FileType('rb'), required=True)
     parser.add_argument('--dst', type=argparse.FileType('wb'), required=True)
     help_rotate = 'page range to be rotated, e.g 1-3'
-    parser.add_argument('--rotate-left', metavar="RANGE", type=hyphen_range, help=help_rotate)
-    parser.add_argument('--rotate-right', metavar="RANGE", type=hyphen_range, help=help_rotate)
-    parser.add_argument('--rotate-180', metavar="RANGE", type=hyphen_range, help=help_rotate)
+    parser.add_argument('--rotate-left',
+                        metavar="RANGE", type=hyphen_range, help=help_rotate)
+    parser.add_argument('--rotate-right',
+                        metavar="RANGE", type=hyphen_range, help=help_rotate)
+    parser.add_argument('--rotate-180',
+                        metavar="RANGE", type=hyphen_range, help=help_rotate)
     args = parser.parse_args()
     src = args.src
     dst = args.dst
