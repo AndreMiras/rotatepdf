@@ -18,7 +18,9 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "pytest",
+    "pytest-cov",
     "ruff",
+    "tox",
 ]
 
 [project.scripts]
