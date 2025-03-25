@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rotatepdf"
+version = "20150425"
+description = "Rotate PDF easily from command line"
+authors = [
+    { name = "Andre Miras" }
+]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "PyPDF2<3"
+]
+
+[project.urls]
+Homepage = "https://github.com/AndreMiras/rotatepdf"
+
+[project.scripts]
+rotatepdf = "rotatepdf.rotatepdf:main"
+
+[tool.setuptools]
+packages = ["rotatepdf"]
