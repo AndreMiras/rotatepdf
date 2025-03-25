@@ -23,3 +23,25 @@ rotatepdf.py --src src.pdf --dst dst.pdf --rotate-right 1-3 --rotate-180 4-10
 ```shell
 pip install -e git://github.com/AndreMiras/rotatepdf.git#egg=rotatepdf
 ```
+
+## Dev
+
+Run tests:
+
+```shell
+make pytest
+# or
+tox -e py
+```
+
+Lint:
+
+```shell
+make lint
+```
+
+Format:
+
+```shell
+make format
+```
