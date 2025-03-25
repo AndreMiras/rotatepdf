@@ -3,8 +3,10 @@
 Rotate pdf pages from command line:
 $ ./rotatepdf.py --src src.pdf --dst dst.pdf --rotate-left 1-3
 """
+
 import argparse
-from PyPDF2 import PdfFileWriter, PdfFileReader
+
+from PyPDF2 import PdfFileReader, PdfFileWriter
 
 
 def hyphen_range(v):
@@ -26,7 +28,7 @@ def hyphen_range(v):
     else:
         start = int(fields[0])
         stop = int(fields[1])
-        page_range = range(start, stop+1)
+        page_range = range(start, stop + 1)
         return page_range
 
 
@@ -36,38 +38,39 @@ def rotate(src_stream, dst_stream, rotate_pages_dict):
     """
     file_reader = PdfFileReader(src_stream)
     file_writer = PdfFileWriter()
-    rotate_left_pages = rotate_pages_dict['rotate_left_pages']
-    rotate_right_pages = rotate_pages_dict['rotate_right_pages']
-    rotate_180_pages = rotate_pages_dict['rotate_180_pages']
+    rotate_left_pages = rotate_pages_dict["rotate_left_pages"]
+    rotate_right_pages = rotate_pages_dict["rotate_right_pages"]
+    rotate_180_pages = rotate_pages_dict["rotate_180_pages"]
     for zb_page_num in range(file_reader.getNumPages()):
         # zero based page num page num
         page_num = zb_page_num + 1
         if page_num in rotate_180_pages:
-            file_writer.addPage(
-                file_reader.getPage(zb_page_num).rotateClockwise(180))
+            file_writer.addPage(file_reader.getPage(zb_page_num).rotateClockwise(180))
         elif page_num in rotate_left_pages:
             file_writer.addPage(
-                file_reader.getPage(zb_page_num).rotateCounterClockwise(90))
+                file_reader.getPage(zb_page_num).rotateCounterClockwise(90)
+            )
         elif page_num in rotate_right_pages:
-            file_writer.addPage(
-                file_reader.getPage(zb_page_num).rotateClockwise(90))
+            file_writer.addPage(file_reader.getPage(zb_page_num).rotateClockwise(90))
         else:
             file_writer.addPage(file_reader.getPage(zb_page_num))
     file_writer.write(dst_stream)
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Rotate pdf pages from command line.")
-    parser.add_argument('--src', type=argparse.FileType('rb'), required=True)
-    parser.add_argument('--dst', type=argparse.FileType('wb'), required=True)
-    help_rotate = 'page range to be rotated, e.g 1-3'
-    parser.add_argument('--rotate-left',
-                        metavar="RANGE", type=hyphen_range, help=help_rotate)
-    parser.add_argument('--rotate-right',
-                        metavar="RANGE", type=hyphen_range, help=help_rotate)
-    parser.add_argument('--rotate-180',
-                        metavar="RANGE", type=hyphen_range, help=help_rotate)
+    parser = argparse.ArgumentParser(description="Rotate pdf pages from command line.")
+    parser.add_argument("--src", type=argparse.FileType("rb"), required=True)
+    parser.add_argument("--dst", type=argparse.FileType("wb"), required=True)
+    help_rotate = "page range to be rotated, e.g 1-3"
+    parser.add_argument(
+        "--rotate-left", metavar="RANGE", type=hyphen_range, help=help_rotate
+    )
+    parser.add_argument(
+        "--rotate-right", metavar="RANGE", type=hyphen_range, help=help_rotate
+    )
+    parser.add_argument(
+        "--rotate-180", metavar="RANGE", type=hyphen_range, help=help_rotate
+    )
     args = parser.parse_args()
     src = args.src
     dst = args.dst
@@ -80,6 +83,7 @@ def main():
         "rotate_180_pages": rotate_180_pages,
     }
     rotate(src, dst, rotate_pages_dict)
+
 
 if __name__ == "__main__":
     main()

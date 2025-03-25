@@ -1,6 +1,8 @@
 import io
+
 import pytest
-from PyPDF2 import PdfFileWriter, PdfFileReader
+from PyPDF2 import PdfFileReader, PdfFileWriter
+
 from rotatepdf import rotate
 
 
@@ -18,38 +20,38 @@ def sample_pdf():
 
 def test_rotate_left(sample_pdf):
     output_stream = io.BytesIO()
-    rotate(sample_pdf, output_stream, {
-        'rotate_left_pages': [1],
-        'rotate_right_pages': [],
-        'rotate_180_pages': []
-    })
+    rotate(
+        sample_pdf,
+        output_stream,
+        {"rotate_left_pages": [1], "rotate_right_pages": [], "rotate_180_pages": []},
+    )
     output_stream.seek(0)
     reader = PdfFileReader(output_stream)
     page = reader.getPage(0)
-    assert page.get('/Rotate') == -90
+    assert page.get("/Rotate") == -90
 
 
 def test_rotate_right(sample_pdf):
     output_stream = io.BytesIO()
-    rotate(sample_pdf, output_stream, {
-        'rotate_left_pages': [],
-        'rotate_right_pages': [1],
-        'rotate_180_pages': []
-    })
+    rotate(
+        sample_pdf,
+        output_stream,
+        {"rotate_left_pages": [], "rotate_right_pages": [1], "rotate_180_pages": []},
+    )
     output_stream.seek(0)
     reader = PdfFileReader(output_stream)
     page = reader.getPage(0)
-    assert page.get('/Rotate') == 90
+    assert page.get("/Rotate") == 90
 
 
 def test_rotate_180(sample_pdf):
     output_stream = io.BytesIO()
-    rotate(sample_pdf, output_stream, {
-        'rotate_left_pages': [],
-        'rotate_right_pages': [],
-        'rotate_180_pages': [1]
-    })
+    rotate(
+        sample_pdf,
+        output_stream,
+        {"rotate_left_pages": [], "rotate_right_pages": [], "rotate_180_pages": [1]},
+    )
     output_stream.seek(0)
     reader = PdfFileReader(output_stream)
     page = reader.getPage(0)
-    assert page.get('/Rotate') == 180
+    assert page.get("/Rotate") == 180
