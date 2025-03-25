@@ -46,3 +46,13 @@ format: format/ruff
 clean:
 	find . -type d -name "__pycache__" -exec rm -r {} +
 	find . -type d -name "*.egg-info" -exec rm -r {} +
+
+release/clean:
+	rm -rf dist/ build/
+
+release/build: release/clean virtualenv
+	$(BUILD)
+	$(TWINE) check dist/*
+
+release/upload:
+	$(TWINE) upload dist/*

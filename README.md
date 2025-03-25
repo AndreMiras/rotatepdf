@@ -1,6 +1,8 @@
 # rotatepdf
 
 [![Tests](https://github.com/AndreMiras/rotatepdf/actions/workflows/tests.yml/badge.svg)](https://github.com/AndreMiras/rotatepdf/actions/workflows/tests.yml)
+[![PyPI release](https://github.com/AndreMiras/rotatepdf/actions/workflows/pypi-release.yml/badge.svg)](https://github.com/AndreMiras/rotatepdf/actions/workflows/pypi-release.yml)
+[![PyPI version](https://badge.fury.io/py/rotatepdf.svg)](https://badge.fury.io/py/rotatepdf)
 
 Rotate pdf pages from command line.
 

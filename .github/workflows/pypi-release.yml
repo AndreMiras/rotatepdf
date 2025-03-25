@@ -1,0 +1,28 @@
+name: PyPI release
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  pypi:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: "pip"
+      - name: Install dependencies
+        run: pip install --upgrade build twine
+      - name: Build
+        run: |
+          python -m build
+          twine check dist/*
+      - name: Publish package
+        if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
+        uses: pypa/gh-action-pypi-publish@v1.12.4
+        with:
+          verbose: true
+          user: __token__
+          password: ${{ secrets.pypi_password }}
