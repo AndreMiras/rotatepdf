@@ -9,4 +9,4 @@ setup(name='rotatepdf',
       url='https://github.com/AndreMiras/rotatepdf',
       packages=['rotatepdf'],
       scripts=['rotatepdf/rotatepdf.py'],
-      install_requires=["PyPDF2"],)
+      install_requires=["PyPDF2<3"],)
