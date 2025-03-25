@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rotatepdf"
-version = "20150425"
+version = "2025.03.25"
 description = "Rotate PDF easily from command line"
 authors = [
     { name = "Andre Miras" }
