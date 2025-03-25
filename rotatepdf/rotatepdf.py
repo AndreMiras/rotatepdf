@@ -13,13 +13,13 @@ def hyphen_range(v):
     """
     Returns a range from a given string including lower bounds and
     upper bounds.
-    >>> hyphen_range("1-3")
+    >>> [x for x in hyphen_range("1-3")]
     [1, 2, 3]
     >>> hyphen_range("foobar")
     Traceback (most recent call last):
     ...
-    ArgumentTypeError: String must have 2 fields
-    >>> hyphen_range("1-1")
+    argparse.ArgumentTypeError: String must have 2 fields
+    >>> [x for x in hyphen_range("1-1")]
     [1]
     """
     fields = v.split("-")

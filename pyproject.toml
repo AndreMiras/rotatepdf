@@ -29,6 +29,10 @@ rotatepdf = "rotatepdf:main"
 [project.urls]
 Homepage = "https://github.com/AndreMiras/rotatepdf"
 
+[tool.pytest.ini_options]
+testpaths = ["tests", "rotatepdf"]
+addopts = "--cov=rotatepdf --doctest-modules"
+
 [tool.ruff]
 target-version = "py313"
 
