@@ -6,7 +6,7 @@ $ ./rotatepdf.py --src src.pdf --dst dst.pdf --rotate-left 1-3
 
 import argparse
 
-from PyPDF2 import PdfFileReader, PdfFileWriter
+from PyPDF2 import PdfReader, PdfWriter
 
 
 def hyphen_range(v):
@@ -36,24 +36,22 @@ def rotate(src_stream, dst_stream, rotate_pages_dict):
     """
     Rotates src_stream to dst_stream given a rotate_pages_dict configuration.
     """
-    file_reader = PdfFileReader(src_stream)
-    file_writer = PdfFileWriter()
+    file_reader = PdfReader(src_stream)
+    file_writer = PdfWriter()
     rotate_left_pages = rotate_pages_dict["rotate_left_pages"]
     rotate_right_pages = rotate_pages_dict["rotate_right_pages"]
     rotate_180_pages = rotate_pages_dict["rotate_180_pages"]
-    for zb_page_num in range(file_reader.getNumPages()):
+    for zb_page_num in range(len(file_reader.pages)):
         # zero based page num page num
         page_num = zb_page_num + 1
         if page_num in rotate_180_pages:
-            file_writer.addPage(file_reader.getPage(zb_page_num).rotateClockwise(180))
+            file_writer.add_page(file_reader.pages[zb_page_num].rotate(180))
         elif page_num in rotate_left_pages:
-            file_writer.addPage(
-                file_reader.getPage(zb_page_num).rotateCounterClockwise(90)
-            )
+            file_writer.add_page(file_reader.pages[zb_page_num].rotate(-90))
         elif page_num in rotate_right_pages:
-            file_writer.addPage(file_reader.getPage(zb_page_num).rotateClockwise(90))
+            file_writer.add_page(file_reader.pages[zb_page_num].rotate(90))
         else:
-            file_writer.addPage(file_reader.getPage(zb_page_num))
+            file_writer.add_page(file_reader.pages[zb_page_num])
     file_writer.write(dst_stream)
 
 
