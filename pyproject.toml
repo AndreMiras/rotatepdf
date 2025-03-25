@@ -15,11 +15,16 @@ dependencies = [
     "PyPDF2<3"
 ]
 
-[project.urls]
-Homepage = "https://github.com/AndreMiras/rotatepdf"
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]
 
 [project.scripts]
-rotatepdf = "rotatepdf.rotatepdf:main"
+rotatepdf = "rotatepdf:main"
+
+[project.urls]
+Homepage = "https://github.com/AndreMiras/rotatepdf"
 
 [tool.setuptools]
 packages = ["rotatepdf"]
